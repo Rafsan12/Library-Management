@@ -8,7 +8,7 @@ import type { Book } from "@/interface/interface";
 import { useNavigate, useParams } from "react-router";
 import BookForm from "../BookForm/BookForm";
 
-const AddOrEditBook = () => {
+export default function AddOrEditBook() {
   const { id } = useParams();
   const isEdit = Boolean(id);
 
@@ -30,7 +30,7 @@ const AddOrEditBook = () => {
     } else {
       await createBook(formData).unwrap();
     }
-    navigate("/");
+    navigate("/all-books");
   };
 
   if (isEdit && isLoading) return <div>Loading...</div>;
@@ -46,6 +46,4 @@ const AddOrEditBook = () => {
       </div>
     </div>
   );
-};
-
-export default AddOrEditBook;
+}

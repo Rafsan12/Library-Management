@@ -1,5 +1,8 @@
 import type { Book } from "@/interface/interface";
-import { useGetAllBooksQuery } from "@/redux/features/api/apiSlice";
+import {
+  useDeleteBookMutation,
+  useGetAllBooksQuery,
+} from "@/redux/features/api/apiSlice";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import BookCard from "../BookCard/BookCard";
@@ -7,8 +10,8 @@ import ViewingBook from "../ViewingBook/ViewingBook";
 
 const AllBooks = () => {
   const { data: books, isLoading, isError } = useGetAllBooksQuery();
-
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+  const [deleteBook] = useDeleteBookMutation();
 
   const navigate = useNavigate();
 
@@ -17,15 +20,22 @@ const AllBooks = () => {
   };
 
   const handleBorrow = (id: string) => {
-    console.log("Borrow book", id);
+    navigate(`/borrow-book/${id}`);
   };
 
   const handleView = (book: Book) => {
     setSelectedBook(book);
   };
 
-  const handleDelete = (id: string) => {
-    console.log("Delete book", id);
+  const handleDelete = async (bookId: string) => {
+    if (confirm("Are you sure you want to delete this book?")) {
+      try {
+        await deleteBook(bookId).unwrap();
+        alert("Book deleted successfully!");
+      } catch {
+        alert("Failed to delete the book.");
+      }
+    }
   };
 
   if (isLoading) return <div>Loading books...</div>;
@@ -33,7 +43,7 @@ const AllBooks = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-3xl font-bold mb-6">All Books</h1>
+      <h1 className="text-5xl text-center font-bold mb-6">All Books</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {books?.map((book) => (
           <BookCard
