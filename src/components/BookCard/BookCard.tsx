@@ -36,7 +36,11 @@ const BookCard = ({
           <Button color="primary" onClick={onEdit}>
             Edit
           </Button>
-          <Button color="success" onClick={onBorrow}>
+          <Button
+            disabled={book.copies === 0}
+            color="success"
+            onClick={onBorrow}
+          >
             Borrow
           </Button>
           <Button color="info" onClick={() => onView(book)}>
