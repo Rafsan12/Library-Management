@@ -1,4 +1,5 @@
-Library Management System
+# Library Management System
+
 A modern, responsive web-based Library Management System built with React, TypeScript, Redux, and Tailwind CSS. This application streamlines library operations, allowing librarians to manage books efficiently with features like adding, editing, and tracking book records. The system uses Redux for global state management, ensuring scalable and predictable state updates. It features a user-friendly interface, a custom loading animation, and responsive design for seamless use across devices.
 Features
 
@@ -108,6 +109,5 @@ Contact
 For questions or feedback, reach out to the project maintainer:
 
 GitHub: Rafsan12
-Email: [Your email address, if you’d like to include it]
 
 Built with ❤️ by Rafsan12
