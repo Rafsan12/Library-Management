@@ -39,7 +39,7 @@ const BookCard = ({
           <Button color="success" onClick={onBorrow}>
             Borrow
           </Button>
-          <Button color="info" onClick={() => onView}>
+          <Button color="info" onClick={() => onView(book)}>
             View
           </Button>
           <Button color="error" onClick={onDelete}>

@@ -1,6 +1,7 @@
 import type { Book } from "@/interface/interface";
 import { useGetAllBooksQuery } from "@/redux/features/api/apiSlice";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import BookCard from "../BookCard/BookCard";
 import ViewingBook from "../ViewingBook/ViewingBook";
 
@@ -9,8 +10,10 @@ const AllBooks = () => {
 
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
 
+  const navigate = useNavigate();
+
   const handleEdit = (id: string) => {
-    console.log("Edit book", id);
+    navigate(`/edit-book/${id}`);
   };
 
   const handleBorrow = (id: string) => {

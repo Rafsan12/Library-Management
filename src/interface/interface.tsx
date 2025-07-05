@@ -18,3 +18,9 @@ export interface BookCardProps {
   onView: (book: Book) => void;
   onDelete: () => void;
 }
+
+export interface BookFormProps {
+  initialValues?: Partial<Book>;
+  onSubmit: (book: Partial<Book>) => void;
+  mode?: "add" | "edit";
+}

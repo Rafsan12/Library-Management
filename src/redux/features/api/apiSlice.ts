@@ -14,7 +14,33 @@ export const apiSlice = createApi({
         response.data,
       providesTags: ["Books"],
     }),
+    getBookById: builder.query<Book, string>({
+      query: (id) => `books/${id}`,
+      transformResponse: (res: { success: boolean; data: Book }) => res.data,
+      providesTags: (_result, _error, id) => [{ type: "Books", id }],
+    }),
+    createBook: builder.mutation<Book, Partial<Book>>({
+      query: (newBook) => ({
+        url: "/books",
+        method: "POST",
+        body: newBook,
+      }),
+      invalidatesTags: ["Books"],
+    }),
+    updateBook: builder.mutation<Book, { id: string; data: Partial<Book> }>({
+      query: ({ id, data }) => ({
+        url: `books/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Books"],
+    }),
   }),
 });
 
-export const { useGetAllBooksQuery } = apiSlice;
+export const {
+  useGetAllBooksQuery,
+  useGetBookByIdQuery,
+  useCreateBookMutation,
+  useUpdateBookMutation,
+} = apiSlice;
